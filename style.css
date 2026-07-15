@@ -80,6 +80,8 @@ section{padding:56px 0;border-top:1px solid var(--ink-line);}
 .card h3{font-family:'Fraunces',serif;font-size:18px;font-weight:500;margin:10px 0 6px;}
 .card p{font-size:13px;color:var(--parchment-dim);margin-bottom:12px;}
 .card-link{font-size:13px;color:var(--gold);text-decoration:none;}
+.embed-card{text-align:center;}
+.embed-card .ep{display:block;margin-bottom:4px;}
 
 .quiz-box{
   background:var(--ink-panel);border:1px solid var(--ink-line);
@@ -110,4 +112,4 @@ footer{padding:36px 0;text-align:center;color:var(--parchment-dim);font-size:13p
   .cta-row{justify-content:center;}
   h1{font-size:34px;}
   .seal{justify-self:center;}
-}
+  }
