@@ -29,9 +29,39 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+<style>
+#liquid-intro { position: fixed; inset: 0; background: #131722; z-index: 9999; display: flex; align-items: center; justify-content: center; animation: fadeOutIntro 0.7s ease 2.6s forwards; pointer-events: none; }
+.logo-stage { position: relative; width: 140px; height: 140px; }
+.logo-img { width: 100%; height: 100%; filter: url(#dissolve); animation: logoFade 2.2s ease 0.6s forwards, logoRise 2.2s ease-in 0.6s forwards; opacity: 1; }
+@keyframes logoFade { 0% { opacity: 1; } 60% { opacity: 0.7; } 100% { opacity: 0; } }
+@keyframes logoRise { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-18px) scale(1.08); } }
+.wisp { position: absolute; bottom: 20px; width: 6px; height: 6px; background: #D4AF37; border-radius: 50%; opacity: 0; filter: blur(1px); animation: wispUp 1.8s ease-out forwards; }
+.w1 { left: 30px; animation-delay: 0.9s; } .w2 { left: 55px; animation-delay: 1.1s; } .w3 { left: 75px; animation-delay: 0.95s; } .w4 { left: 95px; animation-delay: 1.2s; } .w5 { left: 45px; animation-delay: 1.35s; } .w6 { left: 105px; animation-delay: 1.0s; }
+@keyframes wispUp { 0% { opacity: 0; transform: translateY(0) scale(1); } 20% { opacity: 0.8; } 100% { opacity: 0; transform: translateY(-70px) scale(0.3); } }
+@keyframes fadeOutIntro { to { opacity: 0; visibility: hidden; } }
+           </style>
 </head>
 <body>
-
+<div id="liquid-intro">
+  <svg width="0" height="0" style="position:absolute">
+    <filter id="dissolve">
+      <feTurbulence id="turb" type="fractalNoise" baseFrequency="0.012 0.04" numOctaves="2" seed="7" result="noise">
+        <animate attributeName="baseFrequency" from="0.005 0.02" to="0.03 0.15" dur="2.2s" begin="0.6s" fill="freeze" />
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G">
+        <animate attributeName="scale" from="0" to="90" dur="2.2s" begin="0.6s" fill="freeze" />
+      </feDisplacementMap>
+    </filter>
+  </svg>
+  <div class="logo-stage">
+    <img src="app-icon.png" alt="LR" class="logo-img" />
+    <span class="wisp w1"></span>
+    <span class="wisp w2"></span>
+    <span class="wisp w3"></span>
+    <span class="wisp w4"></span>
+    <span class="wisp w5"></span>
+    <span class="wisp w6"></span>
+  </div>
 <div class="wrap">
 
   <nav>
@@ -140,5 +170,12 @@
 
 <script src="https://www.tiktok.com/embed.js"></script>
 <script src="script.js"></script>
+<script>
+  if (sessionStorage.getItem('lr_intro_seen')) {
+    document.getElementById('liquid-intro').style.display = 'none';
+  } else {
+    sessionStorage.setItem('lr_intro_seen', '1');
+  }
+</script>
 </body>
   </html>
